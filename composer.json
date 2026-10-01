@@ -1,0 +1,42 @@
+{
+  "name": "apie/dataset",
+  "description": "Composer package of the apie library: dataset",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Pieter Jordaan",
+      "email": "pieter_jordaan@hotmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Apie\\Dataset\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Apie\\Tests\\Dataset\\": "tests/"
+    }
+  },
+  "extra": {
+    "apie-objects": [
+      "Apie\\Dataset\\DummyApp\\Identifiers\\DummyUserIdentifier",
+      "Apie\\Dataset\\DatasetIdentifier"
+    ]
+  },
+  "require": {
+    "php": ">=8.4",
+    "apie/core": "self.version",
+    "apie/doctrine-entity-datalayer": "self.version",
+    "symfony/cache": "^7.4"
+  },
+  "require-dev": {
+    "apie/faker": "self.version",
+    "apie/fixtures": "self.version",
+    "phpunit/phpunit": "^11.5.2",
+    "phpspec/prophecy-phpunit": "^2.5"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
