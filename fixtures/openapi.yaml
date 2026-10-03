@@ -1,0 +1,830 @@
+openapi: 3.0.0
+info:
+  title: 'Dataset 1CffPUemjj4fcTbm4Vpk8H - test'
+  version: 1.0.0
+servers:
+  -
+    url: data/Dataset/1CffPUemjj4fcTbm4Vpk8H/test/test
+  -
+    url: 'http://localhost/data/Dataset/1CffPUemjj4fcTbm4Vpk8H/test/test'
+paths:
+  /DummyUser:
+    get:
+      tags:
+        - DummyUser
+        - resource
+      description: 'Gets a list of resource that are an instance of DummyUser'
+      operationId: get-all-DummyUser
+      parameters:
+        -
+          name: fields
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: relations
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: items_per_page
+          in: query
+          schema:
+            minimum: 1
+            type: integer
+        -
+          name: page
+          in: query
+          schema:
+            minimum: 0
+            type: integer
+        -
+          name: search
+          in: query
+          schema:
+            minLength: 1
+            type: string
+        -
+          name: 'query[id]'
+          in: query
+          schema:
+            type: string
+        -
+          name: 'query[passwordWithUppercase]'
+          in: query
+          schema:
+            type: string
+        -
+          name: 'query[passwordWithLowercase]'
+          in: query
+          schema:
+            type: string
+        -
+          name: order_by
+          in: query
+          schema:
+            type: array
+            items:
+              enum:
+                - createdAt
+                - +createdAt
+                - '-createdAt'
+                - updatedAt
+                - +updatedAt
+                - '-updatedAt'
+                - password
+                - +password
+                - '-password'
+                - id
+                - +id
+                - '-id'
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - filteredCount
+                  - totalCount
+                  - first
+                  - last
+                  - list
+                type: object
+                properties:
+                  totalCount:
+                    minimum: 0
+                    type: integer
+                  filteredCount:
+                    minimum: 0
+                    type: integer
+                  first:
+                    type: string
+                    format: uri
+                  last:
+                    type: string
+                    format: uri
+                  prev:
+                    type: string
+                    format: uri
+                  next:
+                    type: string
+                    format: uri
+                  list:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DummyUser-get'
+    post:
+      tags:
+        - DummyUser
+        - resource
+      description: 'Creates an instance of DummyUser'
+      operationId: post-DummyUser
+      parameters:
+        -
+          name: fields
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: relations
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DummyUser-post'
+      responses:
+        '201':
+          description: 'Resource was created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DummyUser-get'
+        '400':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '405':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '406':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '422':
+          description: 'A validation error occurred'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException-get'
+        '409':
+          description: 'Resource not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Throwable-get'
+  /Dataset:
+    get:
+      tags:
+        - Dataset
+        - resource
+      description: 'Gets a list of resource that are an instance of Dataset'
+      operationId: get-all-Dataset
+      parameters:
+        -
+          name: fields
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: relations
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: items_per_page
+          in: query
+          schema:
+            minimum: 1
+            type: integer
+        -
+          name: page
+          in: query
+          schema:
+            minimum: 0
+            type: integer
+        -
+          name: search
+          in: query
+          schema:
+            minLength: 1
+            type: string
+        -
+          name: 'query[id]'
+          in: query
+          schema:
+            type: string
+        -
+          name: 'query[hashmap]'
+          in: query
+          schema:
+            type: string
+        -
+          name: 'query[sqliteFile]'
+          in: query
+          schema:
+            type: string
+        -
+          name: order_by
+          in: query
+          schema:
+            type: array
+            items:
+              enum:
+                - createdAt
+                - +createdAt
+                - '-createdAt'
+                - updatedAt
+                - +updatedAt
+                - '-updatedAt'
+                - id
+                - +id
+                - '-id'
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                required:
+                  - filteredCount
+                  - totalCount
+                  - first
+                  - last
+                  - list
+                type: object
+                properties:
+                  totalCount:
+                    minimum: 0
+                    type: integer
+                  filteredCount:
+                    minimum: 0
+                    type: integer
+                  first:
+                    type: string
+                    format: uri
+                  last:
+                    type: string
+                    format: uri
+                  prev:
+                    type: string
+                    format: uri
+                  next:
+                    type: string
+                    format: uri
+                  list:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Dataset-get'
+    post:
+      tags:
+        - Dataset
+        - resource
+      description: 'Creates an instance of Dataset'
+      operationId: post-Dataset
+      parameters:
+        -
+          name: fields
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: relations
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Dataset-post'
+      responses:
+        '201':
+          description: 'Resource was created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset-get'
+        '400':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '405':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '406':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '422':
+          description: 'A validation error occurred'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException-get'
+        '409':
+          description: 'Resource not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Throwable-get'
+  '/DummyUser/{id}':
+    get:
+      tags:
+        - DummyUser
+        - resource
+      description: 'Gets a resource of DummyUser with a specific id'
+      operationId: get-single-DummyUser
+      parameters:
+        -
+          name: fields
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: relations
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: id
+          in: path
+          description: 'id of instance of DummyUser'
+          required: true
+          schema:
+            $ref: '#/components/schemas/DummyUserIdentifier-post'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DummyUser-get'
+        '401':
+          description: 'Requires authorization'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WrongTokenException-get'
+        '403':
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WrongTokenException-get'
+        '404':
+          description: 'Resource not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Throwable-get'
+  '/Dataset/{id}':
+    get:
+      tags:
+        - Dataset
+        - resource
+      description: 'Gets a resource of Dataset with a specific id'
+      operationId: get-single-Dataset
+      parameters:
+        -
+          name: fields
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: relations
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: id
+          in: path
+          description: 'id of instance of Dataset'
+          required: true
+          schema:
+            $ref: '#/components/schemas/DatasetIdentifier-post'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset-get'
+        '401':
+          description: 'Requires authorization'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WrongTokenException-get'
+        '403':
+          description: 'Access denied'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WrongTokenException-get'
+        '404':
+          description: 'Resource not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Throwable-get'
+  '/Dataset/{id}/buildOpenApi':
+    post:
+      tags:
+        - Dataset
+        - action
+      description: 'Runs method buildOpenApi on a Dataset with a specific id'
+      operationId: get-single-Dataset-run-buildOpenApi
+      parameters:
+        -
+          name: fields
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: relations
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: id
+          in: path
+          description: 'id of instance of Dataset'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - boundedContextId
+              type: object
+              properties:
+                boundedContextId:
+                  $ref: '#/components/schemas/BoundedContextId-post'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoredFile-get'
+        '400':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '405':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '406':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '422':
+          description: 'A validation error occurred'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException-get'
+        '404':
+          description: 'Resource not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Throwable-get'
+  '/Dataset/{id}/download/{properties}':
+    get:
+      tags:
+        - Dataset
+        - action
+        - download
+      description: 'Streams a file on a Dataset with a specific id'
+      operationId: stream-single-Dataset-run-download
+      parameters:
+        -
+          name: fields
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: relations
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: id
+          in: path
+          description: 'id of instance of Dataset'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: properties
+          in: path
+          description: 'properties of instance of __construct'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadedFile-get'
+        '400':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '405':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '406':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '422':
+          description: 'A validation error occurred'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException-get'
+        '404':
+          description: 'Resource not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Throwable-get'
+components:
+  schemas:
+    BoundedContext-get:
+      required:
+        - id
+        - resources
+        - actions
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/BoundedContextId-get'
+        resources:
+          $ref: '#/components/schemas/ReflectionClassList-get'
+        actions:
+          $ref: '#/components/schemas/ReflectionMethodList-get'
+    BoundedContext-post:
+      required:
+        - id
+        - resources
+        - actions
+      type: object
+      properties:
+        id:
+          oneOf:
+            -
+              $ref: '#/components/schemas/BoundedContextId-post'
+            -
+              type: string
+          nullable: false
+        resources:
+          $ref: '#/components/schemas/ReflectionClassList-post'
+        actions:
+          $ref: '#/components/schemas/ReflectionMethodList-post'
+    BoundedContextHashmap-get:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/BoundedContext-get'
+    BoundedContextHashmap-post:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/BoundedContext-post'
+    BoundedContextId-get:
+      pattern: '^[a-z][a-z0-9]*$'
+      type: string
+      format: boundedcontextid
+    BoundedContextId-post:
+      pattern: '^[a-z][a-z0-9]*$'
+      type: string
+      format: boundedcontextid
+    Dataset-get:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/DatasetIdentifier-get'
+        hashmap:
+          $ref: '#/components/schemas/BoundedContextHashmap-get'
+        sqliteFile:
+          $ref: '#/components/schemas/SqliteFile-get'
+    Dataset-post:
+      required:
+        - hashmap
+      type: object
+      properties:
+        hashmap:
+          $ref: '#/components/schemas/BoundedContextHashmap-post'
+    DatasetIdentifier-get:
+      pattern: '^[0-9A-Za-z]{22}$'
+      type: string
+      format: datasetidentifier
+    DatasetIdentifier-post:
+      pattern: '^[0-9A-Za-z]{22}$'
+      type: string
+      format: datasetidentifier
+    DummyUser-get:
+      required:
+        - id
+        - passwordWithUppercase
+        - passwordWithLowercase
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/DummyUserIdentifier-get'
+        passwordWithUppercase:
+          type: boolean
+          nullable: false
+        passwordWithLowercase:
+          type: boolean
+          nullable: false
+    DummyUser-post:
+      required:
+        - password
+      type: object
+      properties:
+        password:
+          $ref: '#/components/schemas/NonEmptyString-post'
+    DummyUserIdentifier-get:
+      pattern: '^[0-9A-Za-z]{22}$'
+      type: string
+      format: dummyuseridentifier
+    DummyUserIdentifier-post:
+      pattern: '^[0-9A-Za-z]{22}$'
+      type: string
+      format: dummyuseridentifier
+    NonEmptyString-post:
+      pattern: ^.+$
+      type: string
+      description: 'Any text, except the empty string.'
+      format: nonemptystring
+    NotAcceptedException-get:
+      required:
+        - message
+        - code
+      type: object
+      properties:
+        message:
+          type: string
+          nullable: false
+        code:
+          $ref: '#/components/schemas/mixed'
+    ReflectionClass-get:
+      type: string
+      example: App\Domain\Example
+    ReflectionClass-post:
+      type: string
+      example: App\Domain\Example
+    ReflectionClassList-get:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReflectionClass-get'
+    ReflectionClassList-post:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReflectionClass-post'
+    ReflectionMethod-get:
+      type: string
+      example: 'App\Domain\Example::method'
+    ReflectionMethod-post:
+      type: string
+      example: 'App\Domain\Example::method'
+    ReflectionMethodList-get:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReflectionMethod-get'
+    ReflectionMethodList-post:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReflectionMethod-post'
+    SqliteFile-get:
+      type: string
+      format: path
+    StoredFile-get:
+      type: string
+      format: path
+    Throwable-get:
+      required:
+        - message
+        - code
+      type: object
+      properties:
+        message:
+          type: string
+          nullable: false
+        code:
+          $ref: '#/components/schemas/mixed'
+    UploadedFile-get:
+      type: string
+      format: path
+    ValidationException-get:
+      required:
+        - message
+        - errors
+      type: object
+      properties:
+        message:
+          type: string
+        errors:
+          type: object
+          additionalProperties:
+            type: string
+    WrongTokenException-get:
+      required:
+        - message
+        - code
+      type: object
+      properties:
+        message:
+          type: string
+          nullable: false
+        code:
+          $ref: '#/components/schemas/mixed'
+    mixed:
+      nullable: true
+tags:
+  -
+    name: Dataset
+    description: 'All operations for Dataset'
+  -
+    name: DummyUser
+    description: 'All operations for DummyUser'
