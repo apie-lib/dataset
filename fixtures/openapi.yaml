@@ -551,6 +551,555 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Throwable-get'
+  '/Dataset/{id}/run/{targetBounded}/{targetName}/{targetId}':
+    get:
+      tags:
+        - Dataset
+        - action
+      description: 'Runs method run on a Dataset with a specific id'
+      operationId: get-single-Dataset-run-run-9c93047a49c851b3d0b8a5f1424ef1f6
+      parameters:
+        -
+          name: fields
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: relations
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: id
+          in: path
+          description: 'id of instance of Dataset'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetBounded
+          in: path
+          description: 'targetBounded of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetName
+          in: path
+          description: 'targetName of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetId
+          in: path
+          description: 'targetId of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mixed'
+        '400':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '405':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '406':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '422':
+          description: 'A validation error occurred'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException-get'
+        '404':
+          description: 'Resource not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Throwable-get'
+    put:
+      tags:
+        - Dataset
+        - action
+      description: 'Runs method run on a Dataset with a specific id'
+      operationId: get-single-Dataset-run-run-5cf5030557c4a5e6ec689f6ea92abca3
+      parameters:
+        -
+          name: fields
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: relations
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: id
+          in: path
+          description: 'id of instance of Dataset'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetBounded
+          in: path
+          description: 'targetBounded of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetName
+          in: path
+          description: 'targetName of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetId
+          in: path
+          description: 'targetId of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {  }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mixed'
+        '400':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '405':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '406':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '422':
+          description: 'A validation error occurred'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException-get'
+        '404':
+          description: 'Resource not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Throwable-get'
+    delete:
+      tags:
+        - Dataset
+        - action
+      description: 'Runs method run on a Dataset with a specific id'
+      operationId: get-single-Dataset-run-run-4f278c3d5711d77454807f18f15f5b43
+      parameters:
+        -
+          name: fields
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: relations
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: id
+          in: path
+          description: 'id of instance of Dataset'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetBounded
+          in: path
+          description: 'targetBounded of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetName
+          in: path
+          description: 'targetName of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetId
+          in: path
+          description: 'targetId of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mixed'
+        '400':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '405':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '406':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '422':
+          description: 'A validation error occurred'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException-get'
+        '404':
+          description: 'Resource not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Throwable-get'
+    patch:
+      tags:
+        - Dataset
+        - action
+      description: 'Runs method run on a Dataset with a specific id'
+      operationId: get-single-Dataset-run-run-b2fd35d8428a30a8aebb858f59d0d541
+      parameters:
+        -
+          name: fields
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: relations
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: id
+          in: path
+          description: 'id of instance of Dataset'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetBounded
+          in: path
+          description: 'targetBounded of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetName
+          in: path
+          description: 'targetName of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetId
+          in: path
+          description: 'targetId of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {  }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mixed'
+        '400':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '405':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '406':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '422':
+          description: 'A validation error occurred'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException-get'
+        '404':
+          description: 'Resource not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Throwable-get'
+  '/Dataset/{id}/run/{targetBounded}/{targetName}':
+    get:
+      tags:
+        - Dataset
+        - action
+      description: 'Runs method run on a Dataset with a specific id'
+      operationId: get-single-Dataset-run-run-d33faba3e12dad739a60129107e4d008
+      parameters:
+        -
+          name: fields
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: relations
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: id
+          in: path
+          description: 'id of instance of Dataset'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetBounded
+          in: path
+          description: 'targetBounded of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetName
+          in: path
+          description: 'targetName of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mixed'
+        '400':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '405':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '406':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '422':
+          description: 'A validation error occurred'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException-get'
+        '404':
+          description: 'Resource not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Throwable-get'
+  '/Dataset/{id}/run/{targetBounded}/{targetName}/{targetId}/{targetMethod}':
+    post:
+      tags:
+        - Dataset
+        - action
+      description: 'Runs method run on a Dataset with a specific id'
+      operationId: get-single-Dataset-run-run-516753ebf4ce55336de981d4f8a5dde3
+      parameters:
+        -
+          name: fields
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: relations
+          in: query
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        -
+          name: id
+          in: path
+          description: 'id of instance of Dataset'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetBounded
+          in: path
+          description: 'targetBounded of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetName
+          in: path
+          description: 'targetName of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetId
+          in: path
+          description: 'targetId of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-post'
+        -
+          name: targetMethod
+          in: path
+          description: 'targetMethod of instance of run'
+          required: true
+          schema:
+            $ref: '#/components/schemas/NonEmptyString-nullable-post'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {  }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mixed'
+        '400':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '405':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '406':
+          description: 'Invalid request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAcceptedException-get'
+        '422':
+          description: 'A validation error occurred'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException-get'
+        '404':
+          description: 'Resource not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Throwable-get'
   '/Dataset/{id}/download/{properties}':
     get:
       tags:
@@ -732,6 +1281,12 @@ components:
       pattern: '^[0-9A-Za-z]{22}$'
       type: string
       format: dummyuseridentifier
+    NonEmptyString-nullable-post:
+      pattern: ^.+$
+      type: string
+      description: 'Any text, except the empty string.'
+      format: nonemptystring
+      nullable: true
     NonEmptyString-post:
       pattern: ^.+$
       type: string

@@ -1,27 +1,39 @@
 <?php
 namespace Apie\Dataset;
 
+use Apie\Common\ActionDefinitionProvider;
+use Apie\Common\Actions\CreateObjectAction;
+use Apie\Common\Actions\GetItemAction;
+use Apie\Common\Actions\GetListAction;
+use Apie\Common\Actions\ModifyObjectAction;
+use Apie\Common\Actions\RemoveObjectAction;
+use Apie\Common\Actions\RunItemMethodAction;
+use Apie\Common\ApieFacade;
+use Apie\Common\Wrappers\GeneralServiceFactory;
+use Apie\Core\Attributes\ActionOptions;
+use Apie\Core\Attributes\Context;
 use Apie\Core\Attributes\FakeCount;
 use Apie\Core\Attributes\FakeMethod;
-use Apie\Core\Attributes\StoreOptions;
-use Apie\Core\BoundedContext\BoundedContext;
-use Apie\Core\BoundedContext\BoundedContextHashmap;
-use Apie\Core\BoundedContext\BoundedContextId;
-use Apie\Core\ContextBuilders\ContextBuilderFactory;
-use Apie\Core\Entities\EntityInterface;
-use Apie\Core\FileStorage\FileStorageFactory;
-use Apie\Core\FileStorage\SqliteFile;
-use Apie\Core\Indexing\Indexer;
-use Apie\Core\Lists\ReflectionClassList;
-use Apie\Core\Lists\ReflectionMethodList;
-use Apie\Common\ActionDefinitionProvider;
-use Apie\Core\Attributes\Context;
 use Apie\Core\Attributes\Internal;
 use Apie\Core\Attributes\Policy;
 use Apie\Core\Attributes\RuntimeCheck;
 use Apie\Core\Attributes\StaticCheck;
+use Apie\Core\Attributes\StoreOptions;
+use Apie\Core\BoundedContext\BoundedContext;
+use Apie\Core\BoundedContext\BoundedContextHashmap;
+use Apie\Core\BoundedContext\BoundedContextId;
+use Apie\Core\Context\ApieContext;
 use Apie\Core\ContextConstants;
+use Apie\Core\Entities\EntityInterface;
+use Apie\Core\Enums\RequestMethod;
+use Apie\Core\FileStorage\FileStorageFactory;
+use Apie\Core\FileStorage\SqliteFile;
 use Apie\Core\FileStorage\StoredFile;
+use Apie\Core\Indexing\Indexer;
+use Apie\Core\Lists\ReflectionClassList;
+use Apie\Core\Lists\ReflectionMethodList;
+use Apie\Core\ValueObjects\EntityReference;
+use Apie\Core\ValueObjects\NonEmptyString;
 use Apie\Dataset\DummyApp\Resources\DummyUser;
 use Apie\DoctrineEntityConverter\Factories\PersistenceLayerFactory;
 use Apie\DoctrineEntityConverter\OrmBuilder as DoctrineEntityConverterOrmBuilder;
@@ -37,6 +49,7 @@ use Apie\RestApi\EventListeners\PruneUnusedComponentsSubscriber;
 use Apie\RestApi\OpenApi\OpenApiGenerator;
 use Apie\RestApi\RouteDefinitions\RestApiRouteDefinitionProvider;
 use Apie\SchemaGenerator\ComponentsBuilderFactory;
+use Apie\Serializer\DecoderHashmap;
 use Apie\Serializer\Serializer;
 use Apie\StorageMetadata\DomainToStorageConverter;
 use cebe\openapi\spec\OpenApi;
@@ -60,7 +73,7 @@ final class Dataset implements EntityInterface
 
     protected SqliteFile $sqliteFile;
 
-    #[StaticCheck(new Policy('staticCreate', enabledOnMissingRule: true))]    
+    #[StaticCheck(new Policy('staticCreate', enabledOnMissingRule: true))]
     #[RuntimeCheck(new Policy('create'))]
     public function __construct(
         #[StoreOptions(alwaysMixedData: true)]
@@ -166,7 +179,8 @@ final class Dataset implements EntityInterface
         BoundedContextId $boundedContextId,
         #[Context(ContextConstants::BOUNDED_CONTEXT_ID)] ?BoundedContextId $datasetBoundedContextId = null,
         #[Context(ContextConstants::RESOURCE_NAME)] string $resourceName = 'Dataset',
-        #[Context(ContextConstants::RESOURCE_ID)] ?string $resourceId = null
+        #[Context(ContextConstants::RESOURCE_ID)] ?string $resourceId = null,
+        #[Context] ?DecoderHashmap $decoderHashmap = null
     ): StoredFile {
         $id = $resourceId ?? $this->getId()->toNative();
         $baseUrl = $datasetBoundedContextId?->toNative() ?? '';
@@ -185,7 +199,11 @@ final class Dataset implements EntityInterface
         $dispatcher->addSubscriber(new OpenApiOperationAddedEventSubscriber($this->toDatalayer()));
 
         $generator = new OpenApiGenerator(
-            new ContextBuilderFactory(),
+            GeneralServiceFactory::createContextBuilderFactory(
+                $this->hashmap,
+                $decoderHashmap,
+                []
+            ),
             ComponentsBuilderFactory::createComponentsBuilderFactory(),
             new RestApiRouteDefinitionProvider(
                 new ActionDefinitionProvider(new ServiceLocator([])),
@@ -201,5 +219,94 @@ final class Dataset implements EntityInterface
             'application/json',
             'openapi-' . $resourceName . '-' . $id . '-' . $boundedContextId->toNative() . '.json'
         );
+    }
+
+    #[ActionOptions(
+        pathRemainder: '{targetBounded}/{targetName}/{targetId}',
+        requestMethod: RequestMethod::GET,
+        placeholders: [
+            'targetAction' => GetItemAction::class,
+        ]
+    )]
+    #[ActionOptions(
+        pathRemainder: '{targetBounded}/{targetName}/{targetId}',
+        requestMethod: RequestMethod::PUT,
+        placeholders: [
+            'targetAction' => CreateObjectAction::class,
+        ]
+    )]
+    #[ActionOptions(
+        pathRemainder: '{targetBounded}/{targetName}/{targetId}',
+        requestMethod: RequestMethod::PATCH,
+        placeholders: [
+            'targetAction' => ModifyObjectAction::class,
+        ]
+    )]
+    #[ActionOptions(
+        pathRemainder: '{targetBounded}/{targetName}/{targetId}',
+        requestMethod: RequestMethod::DELETE,
+        placeholders: [
+            'targetAction' => RemoveObjectAction::class,
+        ]
+    )]
+    #[ActionOptions(
+        pathRemainder: '{targetBounded}/{targetName}',
+        requestMethod: RequestMethod::GET,
+        placeholders: [
+            'targetAction' => GetListAction::class,
+        ]
+    )]
+    #[ActionOptions(
+        pathRemainder: '{targetBounded}/{targetName}/{targetId}/{targetMethod}',
+        requestMethod: RequestMethod::POST,
+        placeholders: [
+            'targetAction' => RunItemMethodAction::class,
+        ]
+    )]
+    public function run(
+        #[Context('targetAction')] string $targetAction,
+        #[Context('targetBounded')] BoundedContextId $boundedContextId,
+        #[Context('targetName')] NonEmptyString $resourceName,
+        #[Context('targetId')] ?NonEmptyString $resourceId = null,
+        #[Context('targetMethod')] ?NonEmptyString $targetMethod = null,
+        #[Context(ContextConstants::RAW_CONTENTS)] ?array $rawContents = null,
+        #[Context] ?DecoderHashmap $decoderHashmap = null
+    ): mixed {
+        $dataLayer = $this->toDatalayer();
+        $baseContext = [
+            ContextConstants::APIE_ACTION => $targetAction,
+            ContextConstants::BOUNDED_CONTEXT_ID => $boundedContextId->toNative(),
+            ContextConstants::RESOURCE_NAME => $resourceName->toNative(),
+        ];
+        if ($resourceId) {
+            $baseContext[ContextConstants::RESOURCE_ID] = $resourceId->toNative();
+            $baseContext[EntityReference::class] = new EntityReference(
+                $boundedContextId,
+                $resourceName,
+                $resourceId
+            );
+        }
+        if ($targetMethod) {
+            $baseContext[ContextConstants::METHOD_NAME] = $targetMethod->toNative();
+        }
+        if ($decoderHashmap) {
+            $baseContext[DecoderHashmap::class] = $decoderHashmap;
+        }
+        
+        $context = (new ApieContext($baseContext))
+            ->registerInstance($dataLayer);
+
+        $facade = new ApieFacade(
+            new RestApiRouteDefinitionProvider(
+                new ActionDefinitionProvider(new ServiceLocator([])),
+                new NullLogger()
+            ),
+            $this->hashmap,
+            Serializer::create(),
+            $dataLayer,
+        );
+        return $facade->createAction($context)
+            ->__invoke($context, $rawContents ?? [])
+            ->getResultAsNativeData();
     }
 }

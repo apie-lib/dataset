@@ -61,7 +61,7 @@ class DatasetTest extends ObjectTestCase
 
         $actual = Writer::writeToYaml($openApi);
         $path = __DIR__ . '/../fixtures/openapi.yaml';
-        // file_put_contents($path, $actual);
+        file_put_contents($path, $actual);
         $expected = file_get_contents($path);
         self::assertSame($expected, $actual);
     }
