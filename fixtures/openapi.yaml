@@ -392,6 +392,15 @@ paths:
           required: true
           schema:
             $ref: '#/components/schemas/DummyUserIdentifier-post'
+        -
+          name: If-None-Match
+          in: header
+          required: false
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
       responses:
         '200':
           description: OK
@@ -417,6 +426,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Throwable-get'
+        '304':
+          description: 'Not Modified'
   '/Dataset/{id}':
     get:
       tags:
@@ -448,6 +459,15 @@ paths:
           required: true
           schema:
             $ref: '#/components/schemas/DatasetIdentifier-post'
+        -
+          name: If-None-Match
+          in: header
+          required: false
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
       responses:
         '200':
           description: OK
@@ -473,6 +493,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Throwable-get'
+        '304':
+          description: 'Not Modified'
   '/Dataset/{id}/buildOpenApi':
     post:
       tags:
