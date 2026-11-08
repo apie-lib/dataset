@@ -137,10 +137,6 @@ final class Dataset implements EntityInterface
         if (!@mkdir($entityPath) && !is_dir($entityPath)) {
             throw new \LogicException('Can not create entity folder ' . $entityPath);
         }
-        $proxyPath = $tempFolder . DIRECTORY_SEPARATOR . 'proxies';
-        if (!@mkdir($proxyPath) && !is_dir($proxyPath)) {
-            throw new \LogicException('Can not create proxy folder ' . $proxyPath);
-        }
         $ormBuilder = new DoctrineEntityConverterOrmBuilder(
             new PersistenceLayerFactory(),
             $this->hashmap,
@@ -151,7 +147,6 @@ final class Dataset implements EntityInterface
             buildOnce: false,
             runMigrations: true,
             devMode: true,
-            proxyDir: $proxyPath,
             cache: null,
             path: $entityPath,
             connectionConfig: [
