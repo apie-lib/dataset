@@ -718,7 +718,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {  }
+              properties: {}
       responses:
         '200':
           description: OK
@@ -900,7 +900,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {  }
+              properties: {}
       responses:
         '200':
           description: OK
@@ -1084,7 +1084,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties: {  }
+              properties: {}
       responses:
         '200':
           description: OK
